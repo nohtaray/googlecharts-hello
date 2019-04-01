@@ -12,6 +12,8 @@
     google.charts.setOnLoadCallback(drawChart);
 
     function drawChart() {
+      // --------------- Stack bar ---------------
+
       var data = google.visualization.arrayToDataTable([
         ['Genre', '実績', '見込', { role: 'annotation' }],
         ['A', 60, 15, ''],
@@ -31,16 +33,42 @@
         bar: { groupWidth: '75%' },
         isStacked: true,
         tooltip: {
-          isHtml: true
-        }
+          isHtml: true,
+        },
       };
 
-      var chart = new google.visualization.BarChart(document.getElementById('myPieChart'));
+      var chart = new google.visualization.BarChart(document.getElementById('stackbar'));
+      chart.draw(data, options);
+
+      // --------------- Donuts chart ---------------
+
+      var data = google.visualization.arrayToDataTable([
+        ['Effort', 'Amount given'],
+        ['データ1', 650],
+        ['データ2', 320],
+        ['データ3', 208],
+        ['データ4', 208],
+        ['データ5', 108],
+        ['データ6', 58],
+        ['データ7', 18],
+      ]);
+
+      var options = {
+        title: 'My Daily Activities',
+        pieHole: 0.7,
+        pieSliceTextStyle: {
+          color: 'black',
+        },
+        height: 600,
+      };
+
+      var chart = new google.visualization.PieChart(document.getElementById('donut'));
       chart.draw(data, options);
     }
   </script>
 </head>
 <body>
-<div id="myPieChart" />
+<div id="stackbar"></div>
+<div id="donut"></div>
 </body>
 </html>
